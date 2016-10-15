@@ -12,7 +12,14 @@ class CreateCapitaoTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('captain', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('administradorId')->unsigned();            
+            $table->foreign('administradorId')->references('id')->on('administrator'); 
+            $table->integer('esporteId')->unsigned();            
+            $table->foreign('esporteId')->references('id')->on('esporte');         
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +29,6 @@ class CreateCapitaoTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('captain');
     }
 }

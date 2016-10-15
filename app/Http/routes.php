@@ -90,17 +90,30 @@ Route::group(['prefix'=>'api'], function(){
 		Route::delete('{id}',['uses'=>'AdministradorController@deleteAdministrador']);
 	});
 
-	Route::group(['prefix'=>'jogador'],function(){
+	Route::group(['prefix'=>'esporte'],function(){
 
-		Route::get('',['uses'=>'JogadorController@allJogadores']);
+		Route::get('',['uses'=>'EsporteController@allEsportes']);
 
-		Route::get('{id}',['uses'=>'JogadorController@getJogador']);
+		Route::get('{id}',['uses'=>'EsporteController@getEsporte']);
 
-		Route::post('',['uses'=>'JogadorController@saveJogador']);
+		Route::post('',['uses'=>'EsporteController@saveEsporte']);
 
-		Route::put('{id}',['uses'=>'JogadorController@updateJogador']);
+		Route::put('{id}',['uses'=>'EsporteController@updateEsporte']);
 
-		Route::delete('{id}',['uses'=>'JogadorController@deleteJogador']);
+		Route::delete('{id}',['uses'=>'EsporteController@deleteEsporte']);
+	});
+
+	Route::group(['prefix'=>'capitao'],function(){
+
+		Route::get('',['uses'=>'CapitaoController@allCapitoes']);
+
+		Route::get('{id}',['uses'=>'CapitaoController@getCapitao']);
+
+		Route::post('',['uses'=>'CapitaoController@saveCapitao']);
+
+		Route::put('{id}',['uses'=>'CapitaoController@updateCapitao']);
+
+		Route::delete('{id}',['uses'=>'CapitaoController@deleteCapitao']);
 	});
 
 });

@@ -16,8 +16,8 @@ class CreateAtleticaTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->binary('logo');
-            $table->integer('alunoId')->unsigned();
-            $table->foreign('alunoId')->references('id')->on('student');
+            $table->integer('administradorId')->unsigned();
+            $table->foreign('administradorId')->references('id')->on('administrator');
             $table->string('descricao');
             $table->timestamps();
         });
