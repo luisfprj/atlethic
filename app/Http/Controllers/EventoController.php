@@ -3,50 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Response;
-use App\Jogador;
-
-
-class JogadorController extends Controller
+use App\Http\Requests;
+use App\Evento;
+class EventoController extends Controller
 {
-   public function __construct(Jogador $jogador){
+    public function __construct(Evento $evento){
         header('Access-Control-Allow-Origin: *'); 
         header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-    	$this->jogador = $jogador;
+    	$this->evento = $evento;
     }
-    public function allJogadores()
+    public function allEventos()
     {
-    	return Response::json($this->jogador->allJogadores(),200);
+    	return Response::json($this->evento->allEventos(),200);
     }
-    public function getJogador($id)
+    public function getEvento($id)
     {
-    	$jogador = $this->jogador->getJogador($id);
-    	if(!$jogador){
+    	$evento = $this->evento->getEvento($id);
+    	if(!$evento){
     		return Response::json(['response'=>"Registro não encontrado!"], 400);
     	}
-    	return Response::json($jogador,200);
+    	return Response::json($evento,200);
     }
-    public function saveJogador()
+    public function saveEvento()
     {    	
-        $jogador = $this->jogador->saveJogador();
-    	if(!$jogador){
+        $evento = $this->evento->saveEvento();
+    	if(!$evento){
     		return Response::json(['response'=>"Registro não adicionado!"], 400);
     	}
     	return Response::json(['response'=>"Registro adicionado!"],200);
     }
 
-    public function updateJogador($id)
+    public function updateEvento($id)
     {
-    	$jogador = $this->jogador->updateJogador($id);
-    	if(!$jogador){
+    	$evento = $this->evento->updateEvento($id);
+    	if(!$evento){
     		return Response::json(['response'=>"Registro não encontrado!"], 400);
     	}
-    	return Response::json($jogador,200);
+    	return Response::json($evento,200);
     }
-    public function deleteJogador($id)
+    public function deleteEvento($id)
     {
-    	if($this->jogador->deleteJogador($id)){
+    	if($this->evento->deleteEvento($id)){
     		return Response::json("Registro deletado com sucesso!",200);
     	}
     	return Response::json("Erro ao deletar registro!",400);

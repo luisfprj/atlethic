@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Input;
 class Jogador extends Model
 {
     protected $table = 'jogador';
-	protected $fillable = ['timeId','alunoId', 'status', 'jogando'];
+	protected $fillable = ['timeId','alunoId', 'jogando'];
 
     public function allJogadores(){
         return self::all();

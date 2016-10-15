@@ -3,22 +3,26 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAtleticaTable extends Migration
+class CreateEventoTable extends Migration
 {
-   /**
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('atlethic', function (Blueprint $table) {
+       Schema::create('event', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->binary('logo');
+            $table->string('name');
+            $table->dateTime('data');
+            $table->integer('duracao'); // minutos
+            $table->string('local');
+            $table->integer('atleticaId')->unsigned();
+            $table->foreign('atleticaId')->references('id')->on('atlethic');
             $table->integer('administradorId')->unsigned();
             $table->foreign('administradorId')->references('id')->on('administrator');
-            $table->string('descricao');
+            $table->string('informacoes');
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ class CreateAtleticaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('atlethic');
+        Schema::drop('event');
     }
 }

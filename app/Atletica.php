@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Input;
 
 class Atletica extends Model
 {
-	protected $table = 'atletica';
+	protected $table = 'atlethic';
 	protected $fillable = ['name','logo','administradorId','descricao'];
 
     public function allAtleticas(){

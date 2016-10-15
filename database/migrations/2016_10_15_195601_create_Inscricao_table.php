@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJogadorTable extends Migration
+class CreateInscricaoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateJogadorTable extends Migration
      */
     public function up()
     {
-        Schema::create('jogador', function (Blueprint $table) {
+        Schema::create('application', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('timeId')->unsigned();
             $table->foreign('timeId')->references('id')->on('team'); 
             $table->integer('alunoId')->unsigned();
             $table->foreign('alunoId')->references('id')->on('student');
-            $table->boolean('jogando');
+            $table->enum('status',['Aguardando','Negado','Aprovado']);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateJogadorTable extends Migration
      */
     public function down()
     {
-        Schema::drop('jogador');
+        //
     }
 }

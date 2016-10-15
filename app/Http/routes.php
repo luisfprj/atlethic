@@ -130,6 +130,45 @@ Route::group(['prefix'=>'api'], function(){
 		Route::delete('{id}',['uses'=>'JogadorController@deleteJogador']);
 	});
 
+	Route::group(['prefix'=>'evento'],function(){
+
+		Route::get('',['uses'=>'EventoController@allEventos']);
+
+		Route::get('{id}',['uses'=>'EventoController@getEvento']);
+
+		Route::post('',['uses'=>'EventoController@saveEvento']);
+
+		Route::put('{id}',['uses'=>'EventoController@updateEvento']);
+
+		Route::delete('{id}',['uses'=>'EventoController@deleteEvento']);
+	});
+
+	Route::group(['prefix'=>'participante'],function(){
+
+		Route::get('',['uses'=>'ParticipanteController@allParticipantes']);
+
+		Route::get('{id}',['uses'=>'ParticipanteController@getParticipante']);
+
+		Route::post('',['uses'=>'ParticipanteController@saveParticipante']);
+
+		Route::put('{id}',['uses'=>'ParticipanteController@updateParticipante']);
+
+		Route::delete('{id}',['uses'=>'ParticipanteController@deleteParticipante']);
+	});
+
+	Route::group(['prefix'=>'inscricao'],function(){
+
+		Route::get('',['uses'=>'InscricaoController@allInscricoes']);
+
+		Route::get('{id}',['uses'=>'InscricaoController@getInscricao']);
+
+		Route::post('',['uses'=>'InscricaoController@saveInscricao']);
+
+		Route::put('{id}',['uses'=>'InscricaoController@updateInscricao']);
+
+		Route::delete('{id}',['uses'=>'InscricaoController@deleteInscricao']);
+	});
+
 });
 	Route::get('/', function(){
 		return view('welcome');
