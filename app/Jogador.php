@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Input;
 
 class Jogador extends Model
 {
     protected $table = 'jogador';
-	protected $fillable = ['timeId','alunoId'];
+	protected $fillable = ['timeId','alunoId', 'status', 'jogando'];
 
     public function allJogadores(){
         return self::all();

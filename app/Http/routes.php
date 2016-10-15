@@ -116,6 +116,20 @@ Route::group(['prefix'=>'api'], function(){
 		Route::delete('{id}',['uses'=>'CapitaoController@deleteCapitao']);
 	});
 
+
+	Route::group(['prefix'=>'jogador'],function(){
+
+		Route::get('',['uses'=>'JogadorController@allJogadores']);
+
+		Route::get('{id}',['uses'=>'JogadorController@getJogador']);
+
+		Route::post('',['uses'=>'JogadorController@saveJogador']);
+
+		Route::put('{id}',['uses'=>'JogadorController@updateJogador']);
+
+		Route::delete('{id}',['uses'=>'JogadorController@deleteJogador']);
+	});
+
 });
 	Route::get('/', function(){
 		return view('welcome');
