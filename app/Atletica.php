@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Input;
 
 class Atletica extends Model
 {
 	protected $table = 'atletica';
-	protected $fillable = ['Name','logo','alunoId','descricao'];
+	protected $fillable = ['name','logo','administradorId','descricao'];
 
     public function allAtleticas(){
         return self::all();

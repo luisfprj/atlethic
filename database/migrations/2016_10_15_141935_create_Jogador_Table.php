@@ -19,8 +19,6 @@ class CreateJogadorTable extends Migration
             $table->integer('alunoId')->unsigned();
             $table->foreign('alunoId')->references('id')->on('student');
             $table->enum('status',['Aguardando','Negado','Aprovado']);
-            $table->date('entrouNoTime');
-            $table->date('saiuDoTime');
             $table->boolean('jogando');
             $table->timestamps();
         });

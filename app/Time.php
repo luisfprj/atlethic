@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Input;
 
 class Time extends Model
 {
    protected $table = 'team';
-   protected $fillable = ['name','logo','esporteId','alunoId','atleticaId'];
+   protected $fillable = ['name','logo','esporteId','ativo'];
 
     public function allTimes(){
         return self::all();
