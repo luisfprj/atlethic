@@ -8,6 +8,7 @@ use App\Aluno;
 use App\Time;
 use App\Esporte;
 use App\Capitao;
+use App\Jogador;
 use App\Administrador;
 use Illuminate\Support\Facades\Mail;
 
@@ -55,10 +56,9 @@ class Inscricao extends Model
                 );
 
                 Mail::send('avisoInscricao', $data, function ($message) use ($capAluno) {
-                    $message->from('kapeite@gmail.com', 'Learning Laravel');
+                    $message->from('kapeite@gmail.com', 'Atletica');
 
-                    $message->to($capAluno->email)->subject('Learning Laravel test email');
-
+                    $message->to($capAluno->email)->subject('Nova inscricao');
                 });
             }
         }
@@ -68,11 +68,43 @@ class Inscricao extends Model
     public function updateInscricao($id)
     {
         $inscricao = self::find($id);
-        if(is_null($inscricao)){
+        if(is_null($inscricao) || $inscricao->status != 'Aguardando'){
             return false;
         }
         $input = Input::all();
         $inscricao->fill($input); // associação em massa
+        $naoExisteJogador = Jogador::where('alunoId',$inscricao->alunoId)->where('timeId',$inscricao->timeId)->count() == 0;
+
+        if($inscricao->status=="Aprovado" && $naoExisteJogador){
+            $jogador = new Jogador();
+            $jogador->alunoId = $inscricao->alunoId;        
+            $jogador->timeId = $inscricao->timeId;
+            $jogador->jogando = 1;
+            $jogador->save();
+        }
+        $aluno = new Aluno();
+        $aluno = $aluno->getAluno($inscricao->alunoId);
+        $time = new Time();
+        $time = $time->getTime($inscricao->timeId);
+        if($inscricao->status != 'Aguardando'){
+          $data = array(
+                'aluno' => $aluno->fullName,
+                'time' => $time->name,
+            );
+            if($inscricao->status == 'Aprovado') {
+                Mail::send('feedbackInscricaoAprovado', $data, function ($message) use ($aluno, $time) {
+                    $message->from('kapeite@gmail.com', 'Atletica');
+
+                    $message->to($aluno->email)->subject('Bem-vindo a ' . $time->name);
+                });
+            } else {
+                Mail::send('feedbackInscricaoNegado', $data, function ($message) use ($aluno) {
+                    $message->from('kapeite@gmail.com', 'Atletica');
+
+                    $message->to($aluno->email)->subject('Se fudeu');
+                });
+            }
+        }
         $inscricao->save();
         return $inscricao;
     }

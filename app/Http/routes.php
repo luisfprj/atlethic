@@ -182,6 +182,15 @@ Route::group(['prefix'=>'api'], function(){
 	Route::get('/cadastrocurso', function(){
 		return view('cadastrocurso');
 	});
-	Route::get('/cadastrojogador', function(){
-		return view('cadastrojogador');
+	Route::get('/cadastrotime', function(){
+		return view('cadastroTime');
 	});
+	Route::get('/cadastroesporte', function(){
+		return view('cadastroEsporte');
+	});
+	Route::get('/cadastroadministrador', function(){
+		return view('cadastroAdministrador');
+	});
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
