@@ -190,10 +190,11 @@ Route::group(['prefix'=>'api'], function(){
 	});
 	Route::get('/cadastroadministrador', function(){
 		return view('cadastroAdministrador');
-	});
+	})->middleware('auth');
 	Route::get('/cadastroevento', function(){
 		return view('cadastroEvento');
 	});
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');

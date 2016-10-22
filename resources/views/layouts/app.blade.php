@@ -47,10 +47,11 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-            
+                @if (!Auth::guest())
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroatletica') }}">Atlética</a></li>
                 </ul>
+                @endif
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastrocurso') }}">Curso</a></li>
                 </ul>
@@ -60,9 +61,11 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroesporte') }}">Esporte</a></li>
                 </ul>
+                @if (!Auth::guest())
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroadministrador') }}">Administrador</a></li>
                 </ul>
+                @endif
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroevento') }}">Evento</a></li>
                 </ul>
@@ -75,7 +78,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->fullName }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">

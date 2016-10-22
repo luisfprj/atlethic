@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Input;
 
 class Administrador extends Model
 {
-  protected $table = 'administrator';
+   protected $table = 'administrator';
    protected $fillable = ['alunoId'];
 
    public function allAdministradores(){

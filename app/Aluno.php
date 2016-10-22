@@ -65,10 +65,10 @@ class Aluno extends Model implements Authenticatable
     }
 
     public function getAuthIdentifierName(){
-        return "fullname";
+        return "id";
     }
     public function getAuthIdentifier(){
-        return $this->fullname;
+        return $this->id;
     }
     public function getAuthPassword(){
         return $this->senha;

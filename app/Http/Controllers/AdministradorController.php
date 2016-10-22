@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Response;
 use App\Administrador;
+use App\Aluno;
 use App\Http\Requests;
 
 class AdministradorController extends Controller
@@ -16,7 +17,12 @@ class AdministradorController extends Controller
     }
     public function allAdministradores()
     {
-    	return Response::json($this->administrador->allAdministradores(),200);
+        $administradores = $this->administrador->allAdministradores();
+        $aluno = new Aluno();
+        for($i = 0; $i < count($administradores); $i++){
+            $administradores[$i]->aluno = $aluno->getAluno($administradores[$i]->alunoId);
+        }
+    	return Response::json($administradores ,200);
     }
     public function getAdministrador($id)
     {
@@ -24,6 +30,7 @@ class AdministradorController extends Controller
     	if(!$administrador){
     		return Response::json(['response'=>"Registro não encontrado!"], 400);
     	}
+        $administrador->aluno = Aluno::getAluno($administrador->alunoId);
     	return Response::json($administrador,200);
     }
     public function saveAdministrador()
