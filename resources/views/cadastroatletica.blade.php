@@ -38,7 +38,7 @@
                             <label for="informacoes" class="col-md-4 control-label">Informações</label>
 
                             <div class="col-md-6">
-                                <textarea name="informacoes" form="usrform"></textarea>  
+                                <textarea type="text" class="form-control" name="informacoes" form="usrform"></textarea>  
                             </div>
                         </div>
 

@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Hash;
 
-class Aluno extends Model
+class Aluno extends Model implements Authenticatable
 {
     protected $hidden = ['senha'];
     protected $table = 'student';
@@ -61,5 +62,24 @@ class Aluno extends Model
             return false;
         }
         return $aluno->delete();
+    }
+
+    public function getAuthIdentifierName(){
+        return "fullname";
+    }
+    public function getAuthIdentifier(){
+        return $this->fullname;
+    }
+    public function getAuthPassword(){
+        return $this->senha;
+    }
+    public function getRememberToken(){
+        return;
+    }
+    public function setRememberToken($value){
+        return;
+    }
+    public function getRememberTokenName(){
+        return;
     }
 }

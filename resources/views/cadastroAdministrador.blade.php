@@ -11,7 +11,7 @@
                     <div class="row">
                       <div  class="col-md-5 ">
                         <center><label>Alunos</label></center>
-                          <select multiple class="form-control" style="font-size: 18px;">
+                          <select size="5" multiple class="form-control" style="font-size: 18px;">
                             <option id="box">Ciencia da computação</option>
                             <option>2</option>
                             <option>3</option>
@@ -25,7 +25,7 @@
                       </div>
                       <div class="col-md-5 ">
                           <center><label>Administradores</label></center>
-                          <select multiple class="form-control" style="font-size: 18px;">
+                          <select size="5" multiple class="form-control" style="font-size: 18px;">
                             <option id="box">Ciencia da computação</option>
                             <option>2</option>
                             <option>3</option>
