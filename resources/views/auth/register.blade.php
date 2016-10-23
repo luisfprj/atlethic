@@ -56,9 +56,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
-
-                        
+                        </div>             
                         <div class="form-group">
                             <label for="turno" class="col-md-4 control-label">Turno</label>
                               <div class="col-md-6">                                
@@ -72,10 +70,8 @@
                         <div class="form-group">
                             <label for="curso" class="col-md-4 control-label">Curso</label>
                               <div class="col-md-6">                            
-                                <select class="form-control" name="curso">
-                                <option value="1">Ciência Computação</option>
-                                <option value="2">Engenharia</option>
-                                <option value="3">Medicina</option>
+                                <select class="form-control" name="curso" id="listaCurso">
+                                
                                 </select>
                               </div>
                         </div>    
@@ -121,4 +117,23 @@
         </div>
     </div>
 </div>
+<script>
+$( document ).ready(function(){ 
+
+    //var curso;
+    //var actionUrl = $("form").attr('action');
+    var getNewData = function(){
+        $("#listaCurso").children().remove();
+        $.get('http://localhost:7090/blog/public/api/curso', function(data){
+            var listaCurso = $("#listaCurso");
+            data.forEach(curso => {
+                var option = "<option value='"+ curso.id +"'>" + curso.name + "</option>";
+                listaCurso.append(option);
+            })
+        });
+    };
+    getNewData();
+});
+
+</script>
 @endsection

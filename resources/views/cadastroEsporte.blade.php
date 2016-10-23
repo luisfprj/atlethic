@@ -7,68 +7,56 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Esporte</div>
                 <div class="panel-body">
-                    <div class="row">
-                    <div  class="col-md-6 ">
-                    <center><label>Esporte</label></center>
-                    <select multiple class="form-control" size="6" style="font-size: 18px;">                      
-                      <option id="box">Futsal</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                    </div>
-                    <div class="col-md-6 " style="margin-top:30px;">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('api/curso') }}">
-                        {{ csrf_field() }}
+                    <form class="form-horizontal" role="form" method="PUT" action="{{ url('api/esporte') }}">
+                            {{ csrf_field() }}
 
-                        <div  class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Nome</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                            <div  class="form-group">
+                            <label for="esporte" class="col-md-4 control-label">Esporte</label>
+                                <div class="col-md-6">
+                                <select size="5" multiple class="form-control" id="listaEsporte" style="font-size: 18px;">                      
+                                </select>
+                                <hr>
+                                </div>
                             </div>
-                        </div>
+                                
+                            <div  class="form-group">
+                                <label for="name" class="col-md-4 control-label">Nome do esporte</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"> 
+                                </div>                                                    
+                            </div>
                             <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn"></i> Editar
-                                </button>
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary" id="btnCreate">
+                                        <i class="fa fa-btn fa-user"></i> Criar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-edit" id="btnUpdate" style="display:none">
+                                        <i class="fa fa-btn fa-user"></i> Salvar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-edit" id="btnRemove" style="display:none">
+                                        <i class="fa fa-btn fa-user"></i> Deletar
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                    </div>
-                    </div>
+                        </form>
+
+                    <HR>
                     <HR>
                     <div class="row" style="margin-top:10%;">
                       <div  class="col-md-5 ">
                         <center><label>Administrador</label></center>
                           <select multiple class="form-control" style="font-size: 18px;">
-                            <option id="box">Luis Felipe</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            
                           </select>
                       </div>
                       <div class="col-md-2 " >
-                        <button type="" style="margin-top:30px;" class="btn btn-success">Adicionar --></button>
-                        <button type=""  class="btn btn-default"><-- Remover</button> 
+                        <button type="" style="margin-top:30px;" class="btn btn-success">Adicionar Cap</button>
+                        <button type=""  class="btn btn-default">Remover Cap</button> 
                       </div>
                       <div class="col-md-5 ">
                           <center><label>Capitão</label></center>
                           <select multiple class="form-control" style="font-size: 18px;">
-                            <option id="box">Victor</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            
                           </select>
                       </div>
                     </div>
@@ -77,38 +65,77 @@
         </div>
     </div>
 </div>   
-            <script> 
+<script>
+$( document ).ready(function(){
+    var actionUrl = $("form").attr('action');
+    var getNewData = function(){
+        $("#listaEsporte").children().remove();
+        $.get('http://localhost:7090/blog/public/api/esporte', function(data){
+            var listaEsporte = $("#listaEsporte");
+            data.forEach(esporte => {
+                var option = "<option value='"+ esporte.id +"'>" + esporte.name + "</option>";
+                listaEsporte.append(option);
+            })
+        });
+    };
+    getNewData();
+    $("#listaEsporte").change(function(ev){
+        var selected = $(ev.target).find("option:selected");
+        $("#name").attr('value', selected.text());
+        $("form").attr('action', actionUrl + "/" + selected.val());
+        $("button").css("display", "");
+    });
 
-
-  // Estrutura de resultado.
-            $.getJSON('api/curso', function(data){
-            this.qtd = data.length;
-            this.retorno = '';
- 
-            for (i = 0; i < this.qtd; i++){
-                this.retorno += 'id: ' + data.usuarios[i].id + '<br />';
-                this.retorno += 'name: ' + data.usuarios[i].name + ' - ';
-                
+    $("#btnCreate").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: actionUrl,
+            type:'post',
+            data:$('form').serialize(),
+            success:function(){
+               // getNewData();
+                location.reload();
             }
- 
-            alert(this.retorno);
-            });
+        });
+    });
+
+    $("#btnUpdate").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: $("form").attr('action'),
+            type:'put',
+            data:$('form').serialize(),
+            success:function(){
+                //getNewData();
+                location.reload();
+            }
+        });
+    });
+
+    $("#btnRemove").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: $("form").attr('action'),
+            type:'delete',
+            success:function(){
+                $("#name").attr('value', "");
+                getNewData();
+            }
+        });
+    });
 
 
-
-
-
-              /*$.getJSON( "api/curso", function( data ) {
-                var items = [];
-                alert (JSON.stringify(items));
-               $.each( data, function( id, name, created_at, updated_at  ) {
-                 items.push( "<li id='" + id + "'>" + name + "</li>" );
-               });
-
-                $( "<ul/>", {
-                  "class": "my-new-list",
-                  html: items.join( "" )
-                }).appendTo( "body" );
-              });*/
-            </script>
+    var getAdminNewData = function(){
+        $("#listaAdministrador").children().remove();
+        $.get('http://localhost:7090/blog/public/api/administrador', function(data){
+            var listaAdministrador = $("#listaAdministrador");
+            administradores = data;
+            data.forEach(administrador => {
+                var option = "<option value='"+ administrador.id +"'>" + administrador.aluno.fullName + "</option>";
+                listaAdministrador.append(option);
+            })
+        });
+    };
+}); 
+</script>
 @endsection

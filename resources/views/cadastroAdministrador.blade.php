@@ -14,11 +14,7 @@
                         <center><label>Alunos</label></center>
 
                           <select size="5" multiple id="listaAlunos" class="form-control" name="alunoId" style="font-size: 18px;">
-                            <option id="box">Ciencia da computação</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            
                           </select>
                       </div>
                       <div class="col-md-2 " >
@@ -28,11 +24,7 @@
                       <div class="col-md-5 ">
                           <center><label>Administradores</label></center>
                           <select size="5" multiple name="administradorId" id="listaAdministrador" class="form-control" style="font-size: 18px;">
-                            <option id="box">Ciencia da computação</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            
                           </select>
                       </div>
                     </div>

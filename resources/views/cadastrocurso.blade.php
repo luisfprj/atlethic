@@ -1,56 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Cursos</div>
-                <div class="panel-body">
-                    <div class="row">
-                    <div  class="col-md-6 ">
-                    <select multiple class="form-control" id="listaCurso" style="font-size: 18px;">
-                      
-                    </select>
+                    <div class="panel-heading">Cursos
                     </div>
-                    <div class="col-md-12 ">
-                    <form class="form-horizontal" role="form" method="PUT" action="{{ url('api/curso') }}">
-                        {{ csrf_field() }}
+                <div class="panel-body">                     
+                        <form class="form-horizontal" role="form" method="PUT" action="{{ url('api/curso') }}">
+                            {{ csrf_field() }}
 
-                        <div  class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-12 control-label">Nome do curso</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                            <div  class="form-group">
+                            <label for="curso" class="col-md-4 control-label">Curso</label>
+                                <div class="col-md-6">
+                                <select size="5" multiple class="form-control" id="listaCurso" style="font-size: 18px;">                      
+                                </select>
+                                <hr>
+                                </div>
                             </div>
-                        </div>
+                                
+                            <div  class="form-group">
+                                <label for="name" class="col-md-4 control-label">Nome do curso</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"> 
+                                </div>                                                    
+                            </div>
                             <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" id="btnCreate">
-                                    <i class="fa fa-btn fa-user"></i> Criar
-                                </button>
-                                <button type="submit" class="btn btn-primary btn-edit" id="btnUpdate" style="display:none">
-                                    <i class="fa fa-btn fa-user"></i> Salvar
-                                </button>
-                                <button type="submit" class="btn btn-primary btn-edit" id="btnRemove" style="display:none">
-                                    <i class="fa fa-btn fa-user"></i> Deletar
-                                </button>
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary" id="btnCreate">
+                                        <i class="fa fa-btn fa-user"></i> Criar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-edit" id="btnUpdate" style="display:none">
+                                        <i class="fa fa-btn fa-user"></i> Salvar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-edit" id="btnRemove" style="display:none">
+                                        <i class="fa fa-btn fa-user"></i> Deletar
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                    </div>
-                    </div>
+                        </form>
+                    
                 </div>
             </div>
         </div>
     </div>
-</div>   
+</div>
+
+   
 
 
 <script>
@@ -94,7 +91,8 @@ $( document ).ready(function(){
             type:'put',
             data:$('form').serialize(),
             success:function(){
-                getNewData();
+                //getNewData();
+                location.reload();
             }
         });
     });
