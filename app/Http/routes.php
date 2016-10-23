@@ -68,7 +68,7 @@ Route::group(['prefix'=>'api'], function(){
 
 		Route::get('',['uses'=>'TimeController@allTimes']);
 
-		Route::get('{id}',['uses'=>'TimeController@getTime']);
+		Route::get('{id}',['uses'=>'JogadorController@getTimeJogador']);
 
 		Route::post('',['uses'=>'TimeController@saveTime']);
 

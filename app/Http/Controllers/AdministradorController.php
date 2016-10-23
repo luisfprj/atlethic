@@ -8,6 +8,8 @@ use App\Administrador;
 use App\Aluno;
 use App\Http\Requests;
 
+
+
 class AdministradorController extends Controller
 {
        public function __construct(Administrador $administrador){
@@ -30,7 +32,8 @@ class AdministradorController extends Controller
     	if(!$administrador){
     		return Response::json(['response'=>"Registro não encontrado!"], 400);
     	}
-        $administrador->aluno = Aluno::getAluno($administrador->alunoId);
+        $aluno = new Aluno();
+        $administrador->aluno = $aluno->getAluno($administrador->alunoId);
     	return Response::json($administrador,200);
     }
     public function saveAdministrador()

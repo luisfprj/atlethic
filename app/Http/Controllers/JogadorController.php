@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Jogador;
+use App\Aluno;
+use App\Time;
 
 
 class JogadorController extends Controller
@@ -17,7 +19,15 @@ class JogadorController extends Controller
     }
     public function allJogadores()
     {
-    	return Response::json($this->jogador->allJogadores(),200);
+    	$jogadores = $this->jogador->allJogadores();
+        $aluno = new Aluno();
+        $time = new Time();
+        for($i = 0; $i < count($jogadores); $i++){
+            $jogadores[$i]->aluno = $aluno->getAluno($jogadores[$i]->alunoId);
+            $jogadores[$i]->time = $time->getTime($jogadores[$i]->timeId);
+        }
+
+        return Response::json($jogadores,200);
     }
     public function getJogador($id)
     {
@@ -25,7 +35,25 @@ class JogadorController extends Controller
     	if(!$jogador){
     		return Response::json(['response'=>"Registro não encontrado!"], 400);
     	}
+        $aluno = new Aluno();
+        $time = new Time();
+        $jogador->aluno = $aluno->getAluno($jogador->alunoId);
+        $jogador->time = $time->getTime($jogador->timeId);
     	return Response::json($jogador,200);
+    }
+    public function getTimeJogador($id)
+    {
+        $jogadores = $this->jogador->allJogadoresDoTime($id);
+        $aluno = new Aluno();
+        $time = new Time();
+        for($i = 0; $i < count($jogadores); $i++){
+            $jogadores[$i]->aluno = $aluno->getAluno($jogadores[$i]->alunoId);
+            $jogadores[$i]->time = $time->getTime($jogadores[$i]->timeId);
+        }
+
+        return Response::json($jogadores,200);
+
+
     }
     public function saveJogador()
     {    	

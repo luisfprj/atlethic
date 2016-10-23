@@ -45,4 +45,8 @@ class Jogador extends Model
         }
         return $jogador->delete();
     }
+
+    public function allJogadoresDoTime($id){
+        return self::where('timeId', $id)->get();
+    }
 }
