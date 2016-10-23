@@ -55,9 +55,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastrocurso') }}">Curso</a></li>
                 </ul>
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/cadastrotime') }}">Time</a></li>
-                </ul>
+                
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroesporte') }}">Esporte</a></li>
                 </ul>
