@@ -20,14 +20,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label">Imagem</label>
+                            <label class="col-md-4 control-label"></label>
                             <div class="col-md-6">
                                 <img src="" id="imagem" width="150px" class="img-rounded"> </img>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="logo" class="col-md-4 control-label">Alterar Imagem</label>
+                            <label for="logo" class="col-md-4 control-label"></label>
 
                             <div class="col-md-6">
                                 <input type="file" id="logo" />
@@ -41,7 +41,6 @@
                                 <textarea rows="7" type="text" class="form-control" id="descricao" form="usrform"></textarea>  
                             </div>
                         </div>
-
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <label for="administrador" class="col-md-4 control-label">Presidente</label>
 
@@ -66,8 +65,9 @@
     </div>
 </div>
 <script>
-    $( document ).ready(function(){
-        var data;
+$( document ).ready(function(){
+    var data;
+    var binaryString
     var getNewData = function(){
         $.get('http://localhost:7090/blog/public/api/atletica', function(data){                      
             data.forEach(atletica => {                
@@ -79,18 +79,35 @@
         });
     };
     getNewData();
-    
 
+    var handleFileSelect = function(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+        var reader = new FileReader();
+        reader.onload = function(readerEvt) {
+            binaryString = readerEvt.target.result;
+        };
+            reader.readAsBinaryString(file);
+        }
+    };
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        document.getElementById('logo').addEventListener('change', handleFileSelect, false);
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }   
     $("#btnUpdate").click(function(e){
         e.preventDefault();
         $.ajax({
             url: 'http://localhost:7090/blog/public/api/atletica/1',
             type:'put',
-            data:{name: $("#name").val(), logo: $("#logo").val(), administradorId: 1,  descricao: $("#descricao").val()},
+            data:{name: $("#name").val(), logo: btoa(binaryString), administradorId: 1,  descricao: $("#descricao").val()},
             success:function(){
                 getNewData();
             }
         });
+
     });
 });
 </script>
