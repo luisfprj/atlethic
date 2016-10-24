@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<?php $timeId = 2; ?>
+<?php $timeId = 2;
+    $timeName = "Dextemidos";
+ ?>
     <div class="jumbotron">
           <div class="container">
             <div class="row">
@@ -34,7 +36,7 @@
         <h3>Futsal Dextemidos</h3>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=<?php echo $timeId ?>" class="btn btn-primary" role="button">TimeId 2</a></p>
+        <p><a href="cadastrotime?timeId=<?php echo $timeId ?>&&timeName=<?php echo $timeName ?>" class="btn btn-primary" role="button">TimeId 2</a></p>
       </div>
     </div>
   </div>
@@ -52,7 +54,7 @@ No momento, só temos time masculino, porém as meninas que quiserem participar 
         <h3>Futsal Dextemidos</h3>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=1" class="btn btn-primary" role="button">TimeId 1</a></p>
+        <p><a href="cadastrotime?timeId=1&timeName=Dextemidos2" class="btn btn-primary" role="button">TimeId 1</a></p>
       </div>
     </div>
   </div>

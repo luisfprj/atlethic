@@ -2,12 +2,13 @@
 @extends('layouts.app')
 
 @section('content')
-<?php $timeId = $_GET['timeId']; ?>
+<?php $timeId = $_GET['timeId']; 
+      $timeName = $_GET['timeName'];?>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading" id="timeId" timeId="<?php echo($timeId);  ?>">Nome do Time</div>
+                <div class="panel-heading" id="timeId" timeId="<?php echo($timeId);  ?>"><?php echo($timeName);  ?></div>
                   <div class="panel-body"> 
                     
                     <table class="table table-bordered table-hover text-center" id="listaJogadores">
