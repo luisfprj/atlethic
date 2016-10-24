@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Time;
-use App\Jogador;
+
 
 class TimeController extends Controller
 {
@@ -25,9 +25,7 @@ class TimeController extends Controller
 	    	$time = $this->time->getTime($id);
 	    	if(!$time){
 	    		return Response::json(['response'=>"Registro não encontrado!"], 400);
-	    	}
-	    	//$jogadores = allJogadores();
-	    	
+	    	}    	
 	    
 	    return Response::json($time,200);
 		}

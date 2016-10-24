@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Response;
 use App\Atletica;
+use App\Aluno;
+use App\Administrador;
 
 class AtleticaController extends Controller
 {
@@ -16,7 +18,12 @@ class AtleticaController extends Controller
     }
     public function allAtleticas()
     {
-    	return Response::json($this->atletica->allAtleticas(),200);
+        $atletica = $this->atletica->allAtleticas();
+        $aluno = new Aluno();
+        $administrador = new Administrador();
+        $atletica[0]->administrador = $administrador->getadministrador($atletica[0]->administradorId);
+        $atletica[0]->aluno = $aluno->getAluno($atletica[0]->administrador->alunoId);
+    	return Response::json($atletica,200);
     }
     public function getAtletica($id)
     {

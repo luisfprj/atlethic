@@ -16,7 +16,7 @@
                             <label for="name" class="col-md-4 control-label">Nome</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name">
+                                <input id="name" type="text" class="form-control">
                             </div>
                         </div>
 
@@ -32,7 +32,7 @@
                             <label for="descricao" class="col-md-4 control-label">Descricao</label>
 
                             <div class="col-md-6">
-                                <textarea type="text" class="form-control" name="descricao" form="usrform"></textarea>  
+                                <textarea rows="7" type="text" class="form-control" id="descricao" form="usrform"></textarea>  
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn"></i> Enviar
+                                    <i class="fa fa-btn"></i> Salvar
                                 </button>
                             </div>
                         </div>
@@ -60,8 +60,19 @@
     </div>
 </div>
 <script>
-$.get('http://localhost:7090/blog/public/api/curso', function(data){
-    console.log(data);
+    $( document ).ready(function(){ 
+    var getNewData = function(){
+        $.get('http://localhost:7090/blog/public/api/atletica', function(data){
+            //$('#name').val(data(name));            
+            data.forEach(atletica => {                
+                $("#name").val(atletica.name);
+                $("#logo").val(atletica.logo);
+                $("#descricao").val(atletica.descricao);
+                $("#administrador").val(atletica.aluno.fullName);
+            })          
+        });
+    };
+    getNewData();
 });
 </script>
 @endsection
