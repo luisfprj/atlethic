@@ -9,7 +9,7 @@
                 <div class="panel-heading">Nome da atlética</div>
                 <div class="panel-body">                    
                     
-                      <form class="form-horizontal" role="form" method="POST" action="{{url('/atletica')}}">
+                      <form class="form-horizontal" role="form" method="put" action="{{url('/atletica')}}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="imagem" class="col-md-4 control-label">Imagem</label>
+                            <label class="col-md-4 control-label">Imagem</label>
                             <div class="col-md-6">
                                 <img src="" id="imagem" width="150px" class="img-rounded"> </img>
                             </div>
@@ -52,7 +52,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="btnUpdate" type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn"></i> Salvar
                                 </button>
                             </div>
@@ -66,21 +66,32 @@
     </div>
 </div>
 <script>
-    $( document ).ready(function(){ 
+    $( document ).ready(function(){
+        var data;
     var getNewData = function(){
         $.get('http://localhost:7090/blog/public/api/atletica', function(data){                      
             data.forEach(atletica => {                
-                $("#name").val(atletica.name);
-                //$("#imagem").val(atletica.logo);
-                //var image = document.createElement('image');
-               $("#imagem").attr({src:"data:image/jpeg;base64,"+atletica.logo});
-               //document.body.appendChild(image);
+                $("#name").val(atletica.name);                
+                $("#imagem").attr({src:"data:image/jpeg;base64,"+atletica.logo});            
                 $("#descricao").val(atletica.descricao);
                 $("#administrador").val(atletica.aluno.fullName);
             })          
         });
     };
     getNewData();
+    
+
+    $("#btnUpdate").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: 'http://localhost:7090/blog/public/api/atletica/1',
+            type:'put',
+            data:{name: $("#name").val(), logo: $("#logo").val(), administradorId: 1,  descricao: $("#descricao").val()},
+            success:function(){
+                getNewData();
+            }
+        });
+    });
 });
 </script>
 @endsection
