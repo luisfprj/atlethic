@@ -194,6 +194,9 @@ Route::group(['prefix'=>'api'], function(){
 	Route::get('/cadastroevento', function(){
 		return view('cadastroEvento');
 	});
+	Route::get('/cadastroinscricoes', function(){
+		return view('cadastroInscricoes');
+	})->middleware('auth');;
 
 Route::auth();
 

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Response;
 use App\Http\Requests;
 use App\Inscricao;
-
+use App\Aluno;
+use App\Time;
+use App\Curso;
 class InscricaoController extends Controller
 {
     public function __construct(Inscricao $inscricao){
@@ -16,7 +18,17 @@ class InscricaoController extends Controller
     }
     public function allInscricoes()
     {
-    	return Response::json($this->inscricao->allInscricoes(),200);
+        $inscricoes = $this->inscricao->allInscricoes();
+        $aluno = new Aluno();
+        $time = new Time();
+        $curso = new Curso();
+        for($i = 0; $i < count($inscricoes); $i++){
+            $inscricoes[$i]->aluno = $aluno->getAluno($inscricoes[$i]->alunoId);            
+            $inscricoes[$i]->time = $time->getTime($inscricoes[$i]->timeId)->name;
+            $inscricoes[$i]->curso = $curso->getCurso($inscricoes[$i]->aluno->cursoId)->name;
+        }
+
+    	return Response::json($inscricoes,200);
     }
     public function getInscricao($id)
     {

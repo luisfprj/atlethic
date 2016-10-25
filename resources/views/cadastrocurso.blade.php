@@ -14,7 +14,9 @@
                             <div  class="form-group">
                             <label for="curso" class="col-md-4 control-label">Curso</label>
                                 <div class="col-md-6">
-                                <select size="5" multiple class="form-control" id="listaCurso" style="font-size: 18px;">                      
+                                <select size="5" multiple class="form-control" id="listaCurso" style="font-size: 18px;"> 
+                                <option>
+                                </option>                     
                                 </select>
                                 <hr>
                                 </div>

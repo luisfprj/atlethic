@@ -67,6 +67,12 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroevento') }}">Evento</a></li>
                 </ul>
+                @if (!Auth::guest())
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/cadastroinscricoes') }}">Inscrições</a></li>
+                </ul>
+                @endif
+                
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
