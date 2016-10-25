@@ -119,9 +119,6 @@
 </div>
 <script>
 $( document ).ready(function(){ 
-
-    //var curso;
-    //var actionUrl = $("form").attr('action');
     var getNewData = function(){
         $("#listaCurso").children().remove();
         $.get('http://localhost:7090/blog/public/api/curso', function(data){
