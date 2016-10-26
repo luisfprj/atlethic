@@ -7,84 +7,69 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Novo Evento / Nome Evento</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                   <div  class="form-group">
+                            <label for="evento" class="col-md-4 control-label">Evento</label>
+                                <div class="col-md-6">
+                                <select size="5" multiple class="form-control" id="listaEvento" style="font-size: 18px;"> 
+                                                    
+                                </select>
+                                <hr>
+                                </div>
+                            </div>
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/evento') }}">
+                        <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Nome</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>  
                         <div class="form-group">
-                            <label for="datepicker" class="col-md-4 control-label">Data</label>
+                            <label for="data" class="col-md-4 control-label">Data</label>
 
                             <div class="col-md-6">
-                                <input type="datetime-local" class="form-control" id="datepicker">
-
-                                @if ($errors->has('datepicker'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('datepicker') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="datetime-local" class="form-control" id="data">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="duracao" class="col-md-4 control-label">Duração</label>
 
                             <div class="col-md-6">
-                                <input type="number" class="form-control" id="datepicker" placeholder="Minutos">
-
-                                @if ($errors->has('datepicker'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('datepicker') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('local') ? ' has-error' : '' }}">
-                            <label for="local" class="col-md-4 control-label">Local</label>
-
-                            <div class="col-md-6">
-                                <input id="local" type="text" class="form-control" name="local">
-
-                                @if ($errors->has('local'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('local') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        
-                        <div class="form-group{{ $errors->has('informacoes_confirmation') ? ' has-error' : '' }}">
-                            <label for="informacoes-confirm" class="col-md-4 control-label">Informações</label>
-
-                            <div class="col-md-6">
-                                <textarea id="informacoes-confirm" type="text" class="form-control" name="informacoes_confirmation"></textarea>
-
-                                @if ($errors->has('informacoes_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('informacoes_confirmation') }}</strong>
-                                    </span>
-                                @endif
+                                <input type="number" class="form-control" id="duracao" placeholder="Minutos">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn"></i> Criar Evento
-                                </button>
+                            <label for="local" class="col-md-4 control-label">Local</label>
+
+                            <div class="col-md-6">
+                                <input id="local" type="text" class="form-control" name="local">
                             </div>
+                            
+                                <input TYPE="hidden" id="administradorId" type="text" class="form-control" >
+                            
+                             
+                                <input TYPE="hidden" id="atleticaId" value="1" type="text" class="form-control" >
+                            
+                        </div>                        
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Informações</label>
+                            <div class="col-md-6">
+                                <textarea id="informacoes" type="text" class="form-control"></textarea>
+                         </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary" id="btnCreate">
+                                        <i class="fa fa-btn "></i> Criar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-edit" id="btnUpdate" style="display:none">
+                                        <i class="fa fa-btn "></i> Salvar
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-edit" id="btnRemove" style="display:none">
+                                        <i class="fa fa-btn "></i> Deletar
+                                    </button>
+                                </div>
                         </div>
                     </form>
                 </div>
@@ -93,6 +78,69 @@
     </div>
 </div>
 
-                                                
+<script>
+$( document ).ready(function(){
+    var actionUrl = $("form").attr('action');
+    var getNewData = function(){
+        $.get('http://localhost:7090/blog/public/api/evento', function(data){
+            var listaEvento = $("#listaEvento");
+            data.forEach(evento => {
+                var option = "<option value='"+ evento.id +"' administradorId='"+ evento.administradorId +"' atleticaId='1'  eventoData='"+ evento.data +"' eventoDuracao ='"+ evento.duracao +"' eventoLocal='"+ evento.local +"'  eventoInformacoes ='"+ evento.informacoes +"'  >" + evento.name + "</option>";
+                listaEvento.append(option);
+            })
+        });
+        
+    };
+    getNewData();
+    $("#listaEvento").change(function(ev){
+        var selected = $(ev.target).find("option:selected");
+        $("#name").attr('value', selected.text());
+        $("#data").attr('value', selected.attr("eventoData"));  
+        $("#duracao").attr('value', selected.attr("eventoDuracao"));
+        $("#local").attr('value', selected.attr("eventoLocal"));
+        $("#administradorId").attr('value', selected.attr("administradorId"));
+        $("#informacoes").text(selected.attr("eventoInformacoes"));
+        $("form").attr('action', actionUrl + "/" + selected.val());
+        $("button").css("display", "");
+    });
+
+    $("#btnCreate").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: actionUrl,
+            type:'post',
+            data:$('form').serialize(),
+            success:function(){
+                getNewData();
+            }
+        });
+    });
+
+    $("#btnUpdate").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: $("form").attr('action'),
+            type:'put',
+            data:$('form').serialize(),
+            success:function(){
+                //getNewData();
+                location.reload();
+            }
+        });
+    });
+
+    $("#btnRemove").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: $("form").attr('action'),
+            type:'delete',
+            success:function(){
+                $("#name").attr('value', "");
+                getNewData();
+            }
+        });
+    });
+}); 
+</script>                                        
 
 @endsection
