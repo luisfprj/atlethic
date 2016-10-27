@@ -16,7 +16,7 @@
                                 <hr>
                                 </div>
                             </div>
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/evento') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/api/evento') }}">
                         <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Nome</label>
 
@@ -28,7 +28,7 @@
                             <label for="data" class="col-md-4 control-label">Data</label>
 
                             <div class="col-md-6">
-                                <input type="datetime-local" class="form-control" id="data">
+                                <input type="date" class="form-control" id="data">
                             </div>
                         </div>
                         <div class="form-group">
@@ -91,15 +91,20 @@ $( document ).ready(function(){
         });
         
     };
+
+    
+
     getNewData();
     $("#listaEvento").change(function(ev){
         var selected = $(ev.target).find("option:selected");
         $("#name").attr('value', selected.text());
-        $("#data").attr('value', selected.attr("eventoData"));  
+        $("#data").attr('value', selected.attr("eventoData"));
+        $("#data").attr('value', $("#data").attr('value'));
         $("#duracao").attr('value', selected.attr("eventoDuracao"));
         $("#local").attr('value', selected.attr("eventoLocal"));
         $("#administradorId").attr('value', selected.attr("administradorId"));
         $("#informacoes").text(selected.attr("eventoInformacoes"));
+        
         $("form").attr('action', actionUrl + "/" + selected.val());
         $("button").css("display", "");
     });
@@ -140,6 +145,23 @@ $( document ).ready(function(){
             }
         });
     });
+    var novaData = function(date){
+        var d=new Date(date.split("/").reverse().join("-"));
+        var dd=d.getDate();
+        var mm= d.getMonth();
+        var yy=d.getFullYear();
+        var str = mm + 1;
+        var pad = "000";
+        if(str<10){
+        var ans = pad.substring(1, pad.length - str.length) + str;
+            }
+        else{
+            var ans = pad.substring(0, pad.length - str.length) + str;
+        }    
+        var newdate=yy+"-"+ans+"-"+dd;
+        return newdate;
+    };
+
 }); 
 </script>                                        
 

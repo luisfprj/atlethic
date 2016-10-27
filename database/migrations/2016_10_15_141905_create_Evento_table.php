@@ -15,7 +15,7 @@ class CreateEventoTable extends Migration
        Schema::create('event', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->dateTime('data');
+            $table->date('data');
             $table->integer('duracao'); // minutos
             $table->string('local');
             $table->integer('atleticaId')->unsigned();
