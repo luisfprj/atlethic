@@ -67,7 +67,8 @@
 <script>
 $( document ).ready(function(){
     var data;
-    var binaryString
+    var binaryString;
+    //var logoAtletica;
     var getNewData = function(){
         $.get('http://localhost:7090/blog/public/api/atletica', function(data){                      
             data.forEach(atletica => {                
@@ -75,6 +76,7 @@ $( document ).ready(function(){
                 $("#imagem").attr({src:"data:image/jpeg;base64,"+atletica.logo});            
                 $("#descricao").val(atletica.descricao);
                 $("#administrador").val(atletica.aluno.fullName);
+                binaryString =  atob(atletica.logo);
             })          
         });
     };

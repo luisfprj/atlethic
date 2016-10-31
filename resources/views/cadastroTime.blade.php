@@ -100,6 +100,7 @@
     var binaryString;
     var timeId;
     var getStudentNewData = function(){
+        $("#listaJogadores").children().children().children().remove();
         timeId = $("#timeId").attr("timeid");
         $.get('http://localhost:7090/blog/public/api/time/'+ timeId, function(data){            
             var cont = 1;
@@ -112,8 +113,10 @@
                 $("#imagem").attr({src:"data:image/jpeg;base64,"+jogador.time.logo});
                 var option2 = "<option value='"+ jogador.time.ativo +"'</option>";
                 $("#status").append(option2);
+                binaryString =  atob(jogador.time.logo);
                 cont++;
             })
+
         });
     };
     getStudentNewData();    
@@ -147,6 +150,8 @@
         });
 
     });
+
+    
 
 
 }); 

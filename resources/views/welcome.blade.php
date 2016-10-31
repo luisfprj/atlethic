@@ -33,7 +33,7 @@
         <label id="nameTopo1">Futsal Dextemidos</label>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=1" class="btn btn-primary" role="button">Inscrever-se</a></p>
+        <p><a href="cadastrotime?timeId=1" class="btn btn-primary" role="button">Visualizar</a></p>
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@ No momento, só temos time masculino, porém as meninas que quiserem participar 
         <label id="nameTopo2"></label>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=2" class="btn btn-primary" role="button">Inscrever-se</a></p>
+        <p><a href="cadastrotime?timeId=2" class="btn btn-primary" role="button">Visualizar</a></p>
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@ No momento, só temos time masculino, porém as meninas que quiserem participar 
         <label id="nameTopo3"></label>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=3" class="btn btn-primary" role="button">Inscrever-se</a></p>
+        <p><a href="cadastrotime?timeId=3" class="btn btn-primary" role="button">Visualizar</a></p>
       </div>
     </div>
   </div>
@@ -91,7 +91,7 @@ No momento, só temos time masculino, porém as meninas que quiserem participar 
         <label id="nameTopo4">Futsal Dextemidos</label>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="#" class="btn btn-primary" role="button">Cadastre-se</a></p>
+        <p><a href="#" class="btn btn-primary" role="button">Visualizar</a></p>
       </div>
     </div>
   </div>
@@ -109,7 +109,7 @@ No momento, só temos time masculino, porém as meninas que quiserem participar 
         <h3>Futsal Dextemidos</h3>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="#" class="btn btn-primary" role="button">Cadastre-se</a></p>
+        <p><a href="#" class="btn btn-primary" role="button">Visualizar</a></p>
       </div>
     </div>
   </div>
@@ -127,7 +127,7 @@ No momento, só temos time masculino, porém as meninas que quiserem participar 
         <h3>Futsal Dextemidos</h3>
         <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
 No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="#" class="btn btn-primary" role="button">Cadastre-se</a></p>
+        <p><a href="#" class="btn btn-primary" role="button">Visualizar</a></p>
       </div>
     </div>
   </div>
