@@ -71,10 +71,7 @@
                             <label for="status" class="col-md-4 control-label">Status</label>
                               <div class="col-md-6">                                
                                   <select id="status">
-                                    <option value="1"> Ativo
-                                    </option>
-                                    <option value="0"> Desativo
-                                    </option>
+                                    
                                   </select>                              
                               </div>
                         </div>
@@ -105,18 +102,23 @@
         $.get('http://localhost:7090/blog/public/api/time/'+ timeId, function(data){            
             var cont = 1;
             var listaJogador = $("#listaJogadores tr:last");
+            data[0].time.name
+            $("#name").val(data[0].time.name);
+            $("#nameTopo").text(data[0].time.name);
+            $("#imagem").attr({src:"data:image/jpeg;base64,"+data[0].time.logo});
+            if(data[0].time.ativo){
+            var option2 = "<option value='1'> Ativo </option> <option value='0'> Desativo </option>";
+            }else{
+                option2 = "<option value='0'> Desativo </option> <option value='1'> Ativo </option>";
+            }
+            $("#status").append(option2);
+            binaryString =  atob(data[0].time.logo);
+
             data.forEach(jogador => {                
                 var option = "'<tr>  <td>"+ cont +"</td> <td>"+ jogador.aluno.fullName +"</td> <td>" + jogador.aluno.turno + "</td> <td> " + jogador.jogando +"</td>  </tr>'";
                 listaJogador.after(option);
-                $("#name").val(jogador.time.name);
-                $("#nameTopo").text(jogador.time.name);
-                $("#imagem").attr({src:"data:image/jpeg;base64,"+jogador.time.logo});
-                var option2 = "<option value='"+ jogador.time.ativo +"'</option>";
-                $("#status").append(option2);
-                binaryString =  atob(jogador.time.logo);
                 cont++;
             })
-
         });
     };
     getStudentNewData();    
@@ -143,7 +145,7 @@
         $.ajax({
             url: 'http://localhost:7090/blog/public/api/time/'+timeId,
             type:'put',
-            data:{name: $("#name").val(), logo: btoa(binaryString), ativo: 1},
+            data:{name: $("#name").val(), logo: btoa(binaryString), ativo: $("#status").val()},
             success:function(){
                  getStudentNewData();
             }

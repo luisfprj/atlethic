@@ -23,9 +23,9 @@ class JogadorController extends Controller
         $aluno = new Aluno();
         $time = new Time();
         for($i = 0; $i < count($jogadores); $i++){
-            $jogadores[$i]->aluno = $aluno->getAluno($jogadores[$i]->alunoId);
-            $jogadores[$i]->time = $time->getTime($jogadores[$i]->timeId);
+            $jogadores[$i]->aluno = $aluno->getAluno($jogadores[$i]->alunoId);            
         }
+        $jogadores[0]->time = $time->getTime($jogadores[0]->timeId);
 
         return Response::json($jogadores,200);
     }
@@ -48,8 +48,9 @@ class JogadorController extends Controller
         $time = new Time();
         for($i = 0; $i < count($jogadores); $i++){
             $jogadores[$i]->aluno = $aluno->getAluno($jogadores[$i]->alunoId);
-            $jogadores[$i]->time = $time->getTime($jogadores[$i]->timeId);
-        }
+            }
+            $jogadores[0]->time = $time->getTime($jogadores[0]->timeId);
+           
 
         return Response::json($jogadores,200);
 

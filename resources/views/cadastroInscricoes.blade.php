@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
+<div class="row" style="width:100%">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Nome da atlética</div>
@@ -19,7 +19,7 @@
 					        <th>Status</th>
 					        <th width="5%"></th>
 					        <th width="5%"></th>
-					      
+					      </tr>
 					    </thead>
 					    <tbody>
 
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 	<script>
 
@@ -43,7 +43,7 @@ $( document ).ready(function(){
             var listaJogador = $("#listaInscricoes tr:last");
             data.forEach(inscricao => {
                 if(inscricao.status=="Aguardando"){
-                var option = "'<tr nome='hugo'>  <td>"+ cont +"</td> <td>"+ inscricao.aluno.fullName +"</td> <td> <a href='cadastrotime?timeId="+inscricao.timeId+"'/a>"+ inscricao.time+ "</td> <td> " + inscricao.aluno.email +"</td> <td> " + inscricao.curso +"</td> <td> " + inscricao.aluno.matricula +"</td> <td> " + inscricao.status +"</td> <td><button type='submit' class='btn btn-success' inscricaoId="+inscricao.id+" alunoId="+inscricao.alunoId+" timeId="+inscricao.timeId+" id='btnAceita'> Aprovar </button></td><td> <button type='submit'  class='btn' inscricaoId="+inscricao.id+" id='btnReprova'> Recusar </button></td> </tr>'";
+                var option = "'<tr>  <td>"+ cont +"</td> <td>"+ inscricao.aluno.fullName +"</td> <td> <a href='cadastrotime?timeId="+inscricao.timeId+"'/a>"+ inscricao.time+ "</td> <td> " + inscricao.aluno.email +"</td> <td> " + inscricao.curso +"</td> <td> " + inscricao.aluno.matricula +"</td> <td> " + inscricao.status +"</td> <td><button type='submit' class='btn btn-success' inscricaoId="+inscricao.id+" alunoId="+inscricao.alunoId+" timeId="+inscricao.timeId+" id='btnAceita'> Aprovar </button></td><td> <button type='submit'  class='btn' inscricaoId="+inscricao.id+" id='btnReprova'> Recusar </button></td> </tr>'";
                 listaJogador.after(option);
                 cont++;
             };
@@ -62,17 +62,17 @@ $( document ).ready(function(){
             type:'post',
             data:{timeId: idTime, alunoId: idAluno, jogando: 1},
             success:function(){
-                getNewData();
-            }
-        });
-        $.ajax({
-        	url: 'http://localhost:7090/blog/public/api/inscricao/'+idInscricao,
-            type:'put',
-            data:{status:'Aprovado'},
+                $.ajax({
+                url: 'http://localhost:7090/blog/public/api/inscricao/'+idInscricao,
+                type:'put',
+                data:{status:'Aprovado'},
                 success:function(){
                 getNewData();
             }
         });
+            }
+        });
+        
         };
     });
 

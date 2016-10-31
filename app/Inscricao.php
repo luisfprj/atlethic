@@ -101,7 +101,7 @@ class Inscricao extends Model
                 Mail::send('feedbackInscricaoNegado', $data, function ($message) use ($aluno) {
                     $message->from('kapeite@gmail.com', 'Atletica');
 
-                    $message->to($aluno->email)->subject('Se fudeu');
+                    $message->to($aluno->email)->subject('Status da inscrição na Atlética');
                 });
             }
         }
