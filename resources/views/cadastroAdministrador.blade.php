@@ -73,7 +73,7 @@ $( document ).ready(function(){
     });
 
     $("#addAdmin").click(function(e){
-        e.preventDefault();
+        e.preventDefault(); 
         $.ajax({
             url: actionUrl,
             type:'post',

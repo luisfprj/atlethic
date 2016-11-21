@@ -165,25 +165,25 @@ Route::group(['prefix'=>'api'], function(){
 	});
 	Route::get('/cadastroatletica', function(){
 		return view('cadastroatletica');
-	});
+	})->middleware('auth');
 	Route::get('/cadastrocurso', function(){
 		return view('cadastrocurso');
-	});
+	})->middleware('auth');
 	Route::get('/cadastrotime', function(){
 		return view('cadastroTime');
 	});
 	Route::get('/cadastroesporte', function(){
 		return view('cadastroEsporte');
-	});
+	})->middleware('auth');
 	Route::get('/cadastroadministrador', function(){
 		return view('cadastroAdministrador');
 	})->middleware('auth');
 	Route::get('/cadastroevento', function(){
 		return view('cadastroEvento');
-	});
+	})->middleware('auth');
 	Route::get('/cadastroinscricoes', function(){
 		return view('cadastroInscricoes');
-	})->middleware('auth');;
+	})->middleware('auth');
 
 Route::auth();
 
