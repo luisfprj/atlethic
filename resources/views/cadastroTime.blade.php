@@ -32,12 +32,23 @@
                         <tbody>
                         </tbody>
                   </table>
+                    @if (Auth::check())
                       <div class="form-group">
-                         <button type="submit" class="btn btn-primary">
+                         <button type="submit" class="btn btn-primary" id="btnInscrever">
                               <i class="fa fa-btn "></i> Inscrever-se
                           </button>
                         </div>
+                    @else
+                        <div class="form-group">
+                        <a href="{{ url('/login') }}" class="button">
+                         <button type="submit" class="btn btn-primary" id="btnLogin">
+                              <i class="fa fa-btn "></i> inscrever-se2
+                          </button>
+                          </a>
+                        </div>
+                    @endif
                  <hr>
+                 @if (Auth::id() == '1') 
                   <form class="form-horizontal" role="form" method="POST" action="#">
                         {{ csrf_field() }}
 
@@ -83,15 +94,17 @@
                                 </button>
                             </div>
                         </div>
-                    </form>   
+                    </form>
+                   @endif
+                   <div style="visibility:hidden" value='{{Auth::id()}}' id="idd" ></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 <script>
     $( document ).ready(function(){
+    var userId = $("#idd").attr("value");
     var jogadores;
     var data;
     var binaryString;
@@ -99,7 +112,7 @@
     var getStudentNewData = function(){
         $("#listaJogadores").children().children().children().remove();
         timeId = $("#timeId").attr("timeid");
-        $.get('http://localhost:7090/blog/public/api/time/'+ timeId, function(data){            
+        $.get('http://localhost:7090/blog/public/api/time/'+timeId, function(data){            
             var cont = 1;
             var listaJogador = $("#listaJogadores tr:last");
             data[0].time.name
@@ -114,15 +127,32 @@
             $("#status").append(option2);
             binaryString =  atob(data[0].time.logo);
 
-            data.forEach(jogador => {                
-                var option = "'<tr>  <td>"+ cont +"</td> <td>"+ jogador.aluno.fullName +"</td> <td>" + jogador.aluno.turno + "</td> <td> " + jogador.jogando +"</td>  </tr>'";
+            data.forEach(jogador => { 
+                var jogando = 'Jogando';
+                if(jogador.jogando){}else{jogando='Reserva'};               
+                var option = "'<tr>  <td>"+ cont +"</td> <td>"+ jogador.aluno.fullName +"</td> <td>" + jogador.aluno.turno + "</td> <td> " + jogando +"</td>  </tr>'";
                 listaJogador.after(option);
                 cont++;
             })
         });
     };
-    getStudentNewData();    
 
+    $("#btnInscrever").click(function(e){        
+        e.preventDefault();        
+        $.ajax({
+            url: 'http://localhost:7090/blog/public/api/inscricao',
+            type:'POST',
+            data:{alunoId: userId.toString(), timeId: timeId.toString()},
+            success:function(){
+                 alert("inscrição enviada");
+            }
+        });
+
+    });
+
+
+    getStudentNewData();    
+    
     var handleFileSelect = function(evt) {
     var files = evt.target.files;
     var file = files[0];
@@ -152,6 +182,8 @@
         });
 
     });
+
+
 
     
 

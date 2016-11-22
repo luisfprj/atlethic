@@ -45,7 +45,7 @@
                     <div class="row" style="margin-top:10%;">
                       <div  class="col-md-5 ">
                         <center><label>Administrador</label></center>
-                          <select multiple class="form-control" style="font-size: 18px;">
+                          <select multiple class="form-control" id="listaAdministrador" style="font-size: 18px;">
                             
                           </select>
                       </div>
@@ -55,7 +55,7 @@
                       </div>
                       <div class="col-md-5 ">
                           <center><label>Capitão</label></center>
-                          <select multiple class="form-control" style="font-size: 18px;">
+                          <select multiple class="form-control" id="listaCapitao" style="font-size: 18px;">
                             
                           </select>
                       </div>
@@ -70,6 +70,8 @@ $( document ).ready(function(){
     var actionUrl = $("form").attr('action');
     var getNewData = function(){
         $("#listaEsporte").children().remove();
+        $("#listaAdministrador").children().remove();
+
         $.get('http://localhost:7090/blog/public/api/esporte', function(data){
             var listaEsporte = $("#listaEsporte");
             data.forEach(esporte => {
@@ -77,6 +79,16 @@ $( document ).ready(function(){
                 listaEsporte.append(option);
             })
         });
+        $("#listaAdministrador").children().remove();
+        $.get('http://localhost:7090/blog/public/api/administrador', function(data){
+            var listaAdministrador = $("#listaAdministrador");
+            data.forEach(administrador => {
+                var option = "<option value='"+ administrador.alunoId +"'>" + administrador.aluno.fullName + "</option>";
+                listaAdministrador.append(option);
+            })
+        });
+
+
     };
     getNewData();
     $("#listaEsporte").change(function(ev){
@@ -84,6 +96,17 @@ $( document ).ready(function(){
         $("#name").attr('value', selected.text());
         $("form").attr('action', actionUrl + "/" + selected.val());
         $("button").css("display", "");
+
+        $("#listaCapitao").children().remove();
+            var esporteId = selected.val();
+            //alert(esporteId);
+            $.get('http://localhost:7090/blog/public/api/capitao/'+esporteId.toString(), function(data){
+                var listaCapitao = $("#listaCapitao");
+                data.forEach(capitao => {
+                    var option = "<option value='"+ capitao.id +"'>" + capitao.aluno.fullName + "</option>";
+                    listaCapitao.append(option);
+            })
+        });
     });
 
     $("#btnCreate").click(function(e){

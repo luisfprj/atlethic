@@ -47,32 +47,32 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                @if (!Auth::guest())
+                @if (Auth::id() == '1')
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroatletica') }}">Atlética</a></li>
                 </ul>
                 @endif
-                @if (!Auth::guest())
+                @if (Auth::id() == '1' or Auth::id() == '2' )
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastrocurso') }}">Curso</a></li>
                 </ul>
                  @endif
-                @if (!Auth::guest())
+                @if (Auth::id() == '1' or Auth::id() == '2' )
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroesporte') }}">Esporte</a></li>
                 </ul>
                 @endif
-                @if (!Auth::guest())
+                @if (Auth::id() == '1' or Auth::id() == '2' )
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroadministrador') }}">Administrador</a></li>
                 </ul>
                 @endif
-                @if (!Auth::guest())
+                @if (Auth::id() == '1' or Auth::id() == '2' )
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroevento') }}">Evento</a></li>
                 </ul>
                 @endif
-                @if (!Auth::guest())
+                @if (Auth::id() == '1' or Auth::id() == '2' )
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/cadastroinscricoes') }}">Inscrições</a></li>
                 </ul>

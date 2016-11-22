@@ -8,7 +8,7 @@
                 <div class="panel-heading">Evento</div>
                 <div class="panel-body">
                    <div  class="form-group">
-                            <label for="evento" class="col-md-4 control-label">Evento</label>
+                            <label for="evento" class="col-md-4 control-label"></label>
                                 <div class="col-md-6">
                                 <select size="5" multiple class="form-control" id="listaEvento" style="font-size: 18px;"> 
                                                     

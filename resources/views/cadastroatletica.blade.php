@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+@if (Auth::id() == '1') 
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -64,6 +64,11 @@
         </div>
     </div>
 </div>
+
+@else
+<h1> Você não tem permissão</h1>
+@endif
+
 <script>
 $( document ).ready(function(){
     var data;

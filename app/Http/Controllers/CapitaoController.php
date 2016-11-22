@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Response;
 use App\Http\Requests;
 use App\Capitao;
+use App\Aluno;
+use App\Administrador;
 
 class CapitaoController extends Controller
 {
@@ -26,6 +28,21 @@ class CapitaoController extends Controller
     		return Response::json(['response'=>"Registro não encontrado!"], 400);
     	}
     	return Response::json($capitao,200);
+    }
+    public function getCapitaoEsporte($id)
+    {
+        $capitoes = $this->capitao->allcapitoesDoEsporte($id);
+        $aluno = new Aluno();
+        $administrador = new Administrador();
+        
+        for($i = 0; $i < count($capitoes); $i++){
+            $capitoes[$i]->administrador = $administrador->getAdministrador($capitoes[$i]->administradorId);
+            $capitoes[$i]->aluno = $aluno->getAluno($capitoes[$i]->administrador->alunoId);
+            }
+           
+
+        return Response::json($capitoes,200);
+
     }
     public function saveCapitao()
     {    	

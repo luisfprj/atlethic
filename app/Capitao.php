@@ -47,4 +47,7 @@ class Capitao extends Model
         }
         return $capitao->delete();
     }
+    public function allcapitoesDoEsporte($id){
+        return self::where('esporteId', $id)->get();
+    }
 }

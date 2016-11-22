@@ -94,7 +94,7 @@ Route::group(['prefix'=>'api'], function(){
 
 		Route::get('',['uses'=>'CapitaoController@allCapitoes']);
 
-		Route::get('{id}',['uses'=>'CapitaoController@getCapitao']);
+		Route::get('{id}',['uses'=>'CapitaoController@getCapitaoEsporte']);
 
 		Route::post('',['uses'=>'CapitaoController@saveCapitao']);
 
