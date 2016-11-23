@@ -20,140 +20,32 @@
     </div>
 
     <div class="container">
-
-     <div class="row">
-        <div class="col-md-4">
-
-
-        <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
-      <img id="time1"   alt="200px">
-      <div class="caption">
-        <label id="nameTopo1">Futsal Dextemidos</label>
-        <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
-No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=1" class="btn btn-primary" role="button">Visualizar</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-          
-        </div>
-             <div class="col-md-4">
-
-
-        <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
-      <img id="time2" alt="200px">
-      <div class="caption">
-        <label id="nameTopo2"></label>
-        <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
-No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=2" class="btn btn-primary" role="button">Visualizar</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-          
-        </div>
-             <div class="col-md-4">
-
-
-        <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
-      <img id="time3" alt="200px">
-      <div class="caption">
-        <label id="nameTopo3"></label>
-        <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
-No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="cadastrotime?timeId=3" class="btn btn-primary" role="button">Visualizar</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-          
-        </div>
-      </div>
+  
     
       <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-
-
-        <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
-      <img alt="200px">
-      <div class="caption">
-        <label id="nameTopo4">Futsal Dextemidos</label>
-        <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
-No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="#" class="btn btn-primary" role="button">Visualizar</a></p>
-      </div>
-    </div>
+  <div class="row" id="divPrincipal">
+        
   </div>
-</div>
-          
-        </div>
-             <div class="col-md-4">
 
+ <hr>
+  <center>
+    <footer>
+      <p>&copy; 2016 Company, Inc.</p>
+    </footer>
+  </center>
 
-        <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
-      <img src="">
-      <div class="caption">
-        <h3>Futsal Dextemidos</h3>
-        <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
-No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="#" class="btn btn-primary" role="button">Visualizar</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-          
-        </div>
-             <div class="col-md-4">
-
-
-        <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="thumbnail">
-      <img src="">
-      <div class="caption">
-        <h3>Futsal Dextemidos</h3>
-        <p style="text-align:justify;">Você que é amante de futebol, curte jogar e representar o seu curso em campeonatos internos e externos, não perca seu tempo, venha fazer parte do nosso time de futsal, as vagas estão abertas! 
-No momento, só temos time masculino, porém as meninas que quiserem participar inscreva-se no time!</p>
-        <p><a href="#" class="btn btn-primary" role="button">Visualizar</a></p>
-      </div>
-    </div>
-  </div>
-</div>
-  </div>
-    </div>
-
-      <hr>
-
-      <footer>
-        <p>&copy; 2016 Company, Inc.</p>
-      </footer>
-    </div>
-</div>
 
 <script>
 $( document ).ready(function(){
     var data;
     var data2;
-    var cont=1;
     var getNewData = function(){
         $.get('http://localhost:7090/blog/public/api/time', function(data){                      
-            data.forEach(time => {                
-                $("#time"+cont).attr({src:"data:image/jpeg;base64,"+time.logo});                 
-                $("#nameTopo"+cont).text(time.name);
-                cont++;
+            data.forEach(time => {
+              if(time.ativo){                    
+                var timeOption ="<div class='col-md-4'> <div class='row'><div class='col-sm-12 col-md-12'><div class='thumbnail'> <img alt='200px' src='data:image/jpeg;base64,"+time.logo+"'> <div class='caption'> <label>"+time.name+"</label><p style='text-align:justify;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies, sapien non aliquam gravida, justo libero tristique orci, quis lobortis urna libero vitae orci. Duis egestas, felis ut fermentum tincidunt, magna lacus lacinia eros, ut faucibus nisi mi nec lectus.</p> <p><a href='cadastrotime?timeId="+time.id+"' class='btn btn-primary' role='button'>Visualizar</a></p></div></div></div></div></div>"
+              }
+                $("#divPrincipal").append(timeOption);         
             })          
         });
         $.get('http://localhost:7090/blog/public/api/atletica', function(data2){                      
