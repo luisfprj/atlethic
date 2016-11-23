@@ -46,15 +46,19 @@ class JogadorController extends Controller
         $jogadores = $this->jogador->allJogadoresDoTime($id);
         $aluno = new Aluno();
         $time = new Time();
+
+        if(!$jogadores){
+            $jogadores[0] = new Jogador();
+            $jogadores[0]->time = $time->getTime($id);
+             return Response::json($jogadores,200);
+        }
+        
         for($i = 0; $i < count($jogadores); $i++){
             $jogadores[$i]->aluno = $aluno->getAluno($jogadores[$i]->alunoId);
             }
-            $jogadores[0]->time = $time->getTime($jogadores[0]->timeId);
-           
+            $jogadores[0]->time = $time->getTime($jogadores[0]->timeId);        
 
         return Response::json($jogadores,200);
-
-
     }
     public function saveJogador()
     {    	

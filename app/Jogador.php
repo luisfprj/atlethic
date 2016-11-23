@@ -47,6 +47,10 @@ class Jogador extends Model
     }
 
     public function allJogadoresDoTime($id){
-        return self::where('timeId', $id)->get();
+        $jogador = self::where('timeId', $id)->get();
+        if(!($jogador)->count()){
+            return false;
+        }
+        return $jogador;
     }
 }
