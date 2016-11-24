@@ -8,11 +8,11 @@
     <title>Sistema Atlética</title>
     
     <!-- Fonts -->
-    <link rel="stylesheet" href="../bootstrap/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bootstrap/font-awesome.min.css"  crossorigin="anonymous">
     <link rel="stylesheet" href="../bootstrap/css.css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css"  crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -103,9 +103,9 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="../jquery/jquery2.2.3.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    <script src="../jquery/jquery2.2.3.min.js" crossorigin="anonymous"></script>
 
-    <script src="../bootstrap/bootstrap2.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="../bootstrap/bootstrap2.min.js"  crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
